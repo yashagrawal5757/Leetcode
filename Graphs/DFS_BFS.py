@@ -47,16 +47,6 @@ class Graph:
             for neighbor in graph[current]:
                 self.queue.append(neighbor)
                 
-    def BFS_recursion(self, graph, start):
-        self.graph = graph
-        self.start = start
-        
-        if graph[start] == []:
-            return
-        for neighbor in graph[start]:
-            print(neighbor)
-            start = neighbor
-        self.BFS_recursion(graph, start)
                 
     
                 
