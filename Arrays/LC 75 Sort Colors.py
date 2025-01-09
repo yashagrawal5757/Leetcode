@@ -37,4 +37,41 @@ class Solution:
                 j -= 1
             #once loop terminates, replace anchor    
             nums[j+1] = anchor
+        
+        """ #Counting sort but using map
+
+        Do not return anything, modify nums in-place instead.
+        """
         '''
+        map = {0:0,1:0,2:0}
+        for elem in nums:
+            map[elem] += 1
+        i = 0
+        for k,v in map.items():
+            #print(k,v)
+            if v>0:
+                nums[i:i+v] = [k]*v
+                #print(nums)
+                i = i+v
+        '''
+        
+        # DNF algorithm - one pass O(n) time but constant space o(1)
+        low,mid = 0,0
+        high = len(nums)-1
+        while(mid<=high):
+            if nums[mid] ==2 :
+                temp = nums[high]
+                nums[high] = nums[mid]
+                nums[mid] = temp
+                high = high -1
+                print(nums)
+            elif nums[mid] == 0:
+                temp = nums[low]
+                nums[low] = nums[mid]
+                nums[mid] = temp
+                low += 1
+                mid += 1
+                print(nums)
+            else:
+                mid += 1
+                print(nums)
