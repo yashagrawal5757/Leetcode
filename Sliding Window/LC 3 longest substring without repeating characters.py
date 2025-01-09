@@ -1,36 +1,28 @@
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        #variable sized sliding window because
-            #string given + substring asked + condition given substring is unique + longest substring means find window size
-            i,j = 0,0
-            maxlen = 0
-            map = {}
-            while(j<len(s)):
-                map[s[j]] = 1+map.get(s[j],0)
-                #condition check for unique map
-                if max(map.values())==1:
-                    #all distinct keys, answer calculate
-                    maxlen = max(maxlen,j-i+1)
-                    print("maxlen= ",maxlen)
-                else:
-                    #remove ith element, slide window
-                    while(max(map.values())!=1):
-                        map[s[i]] -= 1
-                        #zero value
-                        if map[s[i]] == 0:
-                            del map[s[i]]
-                        i+= 1
-                    #again we have all unique map
-                    maxlen = max(maxlen, j-i+1)
-                    print("maxlen= ",maxlen )
-                j+= 1
-            
-            return maxlen
-
-
+        #variable length sliding window question
+        if len(s)==0:
+            return 0
+        i,j = 0,0
+        ls = 0
+        map = {}
+        while(j<len(s)):
+            map[s[j]] = map.get(s[j],0)+1
+            #print(map)
+            if map[s[j]]==1:
+                ls = max(ls,j-i+1)
+            else:
+                while(map[s[j]] >1):
+                    #print(map)
+                    #remove ith element
+                    map[s[i]] -= 1
+                    if map[s[i]] == 0:
+                        del map[s[i]]
+                    i+=1
+                ls = max(ls,j-i+1)
+            j+=1
+        return ls
                 
-
-        
-
+                
 
         
